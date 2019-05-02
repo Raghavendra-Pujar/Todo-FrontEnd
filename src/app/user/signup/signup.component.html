@@ -1,0 +1,105 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Fresca" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+</head>
+<div class="limiter">
+  <div class="container-signup-box">
+
+    <div class="wrap-signup">
+
+
+      <div class="form-signup">
+
+        <h2 class="heading">Sign Up To Get Started</h2>
+
+
+        <div class="wrap-input">
+          <span class="label">FirstName</span>
+
+
+          <input type="text" id="inputFirstName" class="input-fields" [(ngModel)]="firstName"
+            placeholder="Enter your First Name" required autofocus>
+        </div>
+
+        <div class="wrap-input">
+          <span class="label">LastName </span>
+
+        </div>
+        <div class="wrap-input">
+          <input type="text" id="inputLastName" class="input-fields" [(ngModel)]="lastName"
+            placeholder="Enter your Last Name" required>
+        </div>
+
+        
+        <div class="wrap-input">
+            <span class="label">Select your Country Code </span>
+  
+          </div>
+        <div class="wrap-input">
+            <select required  [(ngModel)]='country' name='country'
+            type="text" id="country" class="form-control">
+            <option class = "input-fields" value="" disabled selected >Select your Country Code</option>
+            <option class="input-fields" [value]="country.code" *ngFor='let country of countryCodes'>{{country.name}} ({{(country.isd) }})</option>
+          </select>
+        </div>
+
+
+        <div class="wrap-input">
+          <span class="label">Mobile Number </span>
+
+        </div>
+
+
+
+        <div class="wrap-input">
+          <input type="number" id="inputMobile" class="input-fields" [(ngModel)]="mobileNumber"
+            placeholder="Enter your Mobile Number" required  pattern="^[0-9][0-9]{9}$">
+
+        </div>
+      
+        <div class="wrap-input">
+          <span class="label">Email</span>
+
+        </div>
+        <div class="wrap-input">
+          
+          <input type="email" id="inputEmail" class="input-fields" [(ngModel)]="email"
+            placeholder="Enter your Email address" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
+        </div>
+
+        <div class="wrap-input">
+          <span class="label">Password</span>
+        </div>
+
+        <div class="wrap-input">
+          <input type="password" id="inputPassword" class="input-fields" [(ngModel)]="password"
+            placeholder="Enter your Password" required>
+        </div>
+
+
+        <div class="wrap-input">
+            <span class="label">Confirm Password</span>
+          </div>
+  
+          <div class="wrap-input">
+            <input type="password" id="confirmPassword" class="input-fields" [(ngModel)]="confirmPassword"
+              placeholder="Enter your Password" required>
+          </div>
+
+
+
+        <div class="container-signup-form-btn">
+          <button class="signup-form-btn" (click)="signupFunction()">
+            Sign-Up
+          </button>
+        </div>
+
+     
+
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,175 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/todoList">Todo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class = "nav-link" [routerLink]="['/notifications']">Notifications </a>
+      </li>>
+    
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Friends
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/friend-list">Friends List</a>
+            <a class="dropdown-item" href="friend-list">Friends Request</a>
+          </div>
+        </li>
+  
+  
+        <li class="nav-item dropdown text-right">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Profile
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" (click) = "logout()">LogOut</a>
+            
+          </div>
+        </li>
+  
+      </ul>
+    </div>
+  </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-purple">
+
+        <h5 class="modal-title" id="modalLabel">Add Friend</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form #addFriendForm="ngForm" ngNativeValidate>
+          <div class="warp-input">
+          <label for="title">Email</label>
+          <input class="input-fields"required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #mail="ngModel" class="form-control"
+            type="text" id="email" [(ngModel)]="email" name="email" placeholder="Enter Email" autofocus>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button [disabled]="mail.invalid" id="save-button" type="button" class="btn" data-dismiss="modal"
+          (click)="addFriend();addFriendForm.reset()">Add Friend</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="container cover-height">
+
+  <div class="row my-3">
+    <div class="col-12">
+      <button type="button" class="btn bg-purple" data-toggle="modal" data-target="#modal"> Add Friend
+      </button>
+    </div>
+  </div>
+
+  <h1>Friend List</h1>
+
+  <div *ngIf="friendList && friendList.length>0; else nofriends" class="row">
+
+    <ng-container *ngFor="let friendObj of friendList">
+      <div class="col-12 col-md-6 col-lg-4">
+
+        <div [routerLink]="['/todoList']" [queryParams]="{'userId':friendObj.friendId}" class="card custom-card cursor-pointer mt-3">
+          <div class="card-body">
+            <h5 class="card-title">{{friendObj.friend.firstName}} {{friendObj.friend.lastName}}</h5>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+
+    <div *ngIf="hasMoreFriend" class="col-12">
+      <input class="btn btn-secondary" type="button" (click)='listMoreFriend()' value="Load More">
+    </div>
+
+  </div>
+
+  <ng-template #nofriends>
+    <div class="row">
+      <div  *ngIf='!gettingFriendData' class="col-12 text-center my-3">
+        You have No Friends!
+      </div>
+    </div>
+  </ng-template>
+
+  <div *ngIf='gettingFriendData' class="row">
+    <div class="col-12">
+      <div class="text-center">
+        <div class="lds-dual-ring my-3"></div>
+        <p>Getting Friend List</p>
+      </div>
+    </div>
+  </div>
+
+
+  <h1 class="my-3">Request List</h1>
+
+  <div *ngIf="requestList && requestList.length>0; else norequests" class="row">
+    <ng-container *ngFor="let requestObj of requestList">
+      <div class="col-12 col-md-6 col-lg-4 mt-3">
+        <div class="card custom-card cursor-pointer">
+          <div class="card-body">
+            <h5 class="card-title">{{requestObj.sender.firstName}} {{requestObj.sender.lastName}}</h5>
+            <button type="button" class="btn  mt-2" (click)="acceptRequest(requestObj.sender.userId)">Accept</button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="col-12" *ngIf="hasMoreRequest">
+      <input class="btn btn-secondary" type="button" (click)='listMoreRequest()' value="Load More">
+    </div>
+
+  </div>
+
+  <ng-template #norequests>
+    <div class="row">
+      <div *ngIf='!gettingRequestData' class="col-12 text-center my-3">
+        You have No Requests!
+      </div>
+    </div>
+  </ng-template>
+
+  <div *ngIf='gettingRequestData' class="row">
+    <div class="col-12">
+      <div class="text-center">
+        <div class="lds-dual-ring my-3"></div>
+        <p>Getting Request List</p>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

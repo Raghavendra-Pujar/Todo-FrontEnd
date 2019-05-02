@@ -1,0 +1,132 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/todoList">Todo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class = "nav-link" [routerLink]="['/notifications']">Notifications </a>
+      </li>>
+    
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Friends
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/friend-list">Friends List</a>
+            <a class="dropdown-item" href="friend-list">Friends Request</a>
+          </div>
+        </li>
+  
+  
+        <li class="nav-item dropdown text-right">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Profile
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" (click) = "logout()">LogOut</a>
+            
+          </div>
+        </li>
+  
+      </ul>
+    </div>
+  </nav>
+
+
+  <div class="container">
+ 
+      <h2 style="text-align:center">Create an Item</h2>
+      <!-- Button to Open the Modal -->
+      <div class = "continer-btn">
+      <button type="button" class="btn" data-toggle="modal" data-target="#myModal">
+    Create Item  </button>
+    </div>
+      <!-- The Modal -->
+      <div class="modal" id="myModal" data-backdrop="static" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h1 class="modal-title">Todo List Creation</h1>
+              <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+
+                <div class="wrap-input">
+                    <span class="label">ParentTodoId</span>
+                    <input type="text" class="input-fields" placeholder="Enter the parentTodoId of the List" [(ngModel)]="parentItemId"  autofocus/>
+                  </div>
+                  <br>
+
+
+                <div class="wrap-input">
+                    <span class="label">Title</span>
+                    <input type="text" class="input-fields" placeholder="Enter the title of the List" [(ngModel)]="title" required autofocus/>
+                  </div>
+                  <br>
+    
+                  <div class="wrap-input">
+                      <span class="label">Description</span>
+                      <input textbox class="input-fields" placeholder="Enter the description" [(ngModel)]="description" required/>
+                    </div>
+                    <br>
+                    
+            </div>
+                 
+            
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" (click) = "createTodoItem()">Submit</button>
+            </div>
+            
+          
+        </div>
+      </div>
+      
+    </div>
+
+<h2>Todo Items</h2>
+
+
+<div *ngFor="let todo of todoItemList">
+ <p style="text-align:center"> Todo Item for {{todo.parentTodoId}}</p>
+<div class="continer"> <div class ="row">
+<div class="col-md-4" *ngIf="todo">
+  <div *ngIf="todo.completed == allowed || allowed == undefined" class="col-12 col-lg-6 w-100">
+
+  <div class="card" style="width: 18rem;">
+    
+    <div class="card-block">
+      <h4 class="card-title">{{todo.title}}</h4>
+      <p class="card-text">{{todo.description}}</p>
+      <p class="card-text">{{todo.todoId}}</p>
+      <p class="card text">Sub task of {{todo.parentTodoId}}</p>
+    </div>
+
+    <div>
+        <a class="text-link" (click) = 'closeItem(todo.todoId)'> Done</a>
+      </div>
+      <div>
+        <a class ="text-link" (click) = 'openItem(todo.todoId)'>Not Done</a>
+      </div>
+
+      <div>
+          <a class ="text-link" (click) = 'deleteItem(todo.todoId)'>Delete</a>
+        </div>
+  </div>
+  </div>
+</div>
+
+  </div>
+
+
+
+
+

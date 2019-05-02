@@ -1,0 +1,53 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Fresca" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+  </head>
+
+
+<div class="limiter">
+  <div class="container-login-box">
+    <div class="wrap-login">
+    <div class="form-login">
+
+      <div class="heading"> Login into Todo App</div>
+
+      <div class="wrap-input">
+        <span class="label">Email</span>
+        <input type="email" class="input-fields" placeholder="Enter your Email" [(ngModel)]="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" autofocus/>
+      </div>
+      <br>
+
+      <div class="wrap-input">
+      <span class="label">Password</span>
+      <input type="password" class="input-fields" placeholder="Enter your Password" [(ngModel)]="password"/>
+    </div>
+
+    <div class="container-login-form-btn">
+        <button class="login-form-btn" (click) = "signinFunction()">
+          Sign-in
+        </button>
+      </div>
+
+
+      <div class = "footer">
+          <span id = "text-normal">
+            Don’t have an account?
+          </span>
+
+          <a (click) = "goToSignUp()" class="text-link">
+            Sign up now
+          </a>
+        </div>
+
+
+
+
+  </div>
+</div>
+</div>
+</div>
